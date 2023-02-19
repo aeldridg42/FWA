@@ -1,6 +1,7 @@
 package edu.school21.cinema.repositories;
 
 import edu.school21.cinema.models.User;
+import edu.school21.cinema.models.UserLog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -31,5 +32,18 @@ public class UserRepositoryJdbcTempImpl implements UserRepository {
         return jdbcTemplate.query("SELECT * FROM users WHERE email=?",
                 new BeanPropertyRowMapper<>(User.class),
                 new Object[]{email}).stream().findAny();
+    }
+
+    @Override
+    public void saveLog(UserLog log) {
+        jdbcTemplate.update("INSERT INTO userslog (user_id, date, time, ip) VALUES (?, ?, ?, ?)",
+                log.getUser_id(), log.getDate(), log.getTime(), log.getIp());
+    }
+
+    @Override
+    public List<UserLog> getLog(User user) {
+        return jdbcTemplate.query("SELECT * FROM usersLog WHERE user_id=?",
+                new BeanPropertyRowMapper<>(UserLog.class),
+                user.getId());
     }
 }

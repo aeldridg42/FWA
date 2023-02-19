@@ -12,4 +12,6 @@ public interface UserService {
     boolean signIn(String email, String password);
 
     User getUser(String email);
+
+    void addLogInfo(String email, String ip);
 }
