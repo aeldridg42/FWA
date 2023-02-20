@@ -7,11 +7,12 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
 
-    boolean signUp(String email, String firstName, String lastName, String phoneNumber, String password);
+    String signUp(String email, String firstName, String lastName, String phoneNumber, String password);
 
     boolean signIn(String email, String password);
 
     User getUser(String email);
 
     void addLogInfo(String email, String ip);
+
 }

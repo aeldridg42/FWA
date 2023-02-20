@@ -6,12 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
     <title>Sign up + all users</title>
 </head>
+
+<%
+    String errorMsg = "";
+    if (session.getAttribute("ERROR") != null)
+        errorMsg = (String)session.getAttribute("ERROR");
+    session.setAttribute("ERROR", null);
+%>
+
+
 <body>
     <form method="post" action="${pageContext.request.contextPath}/signUp">
         <label for="email">Email
@@ -35,6 +44,7 @@
         </label>
         <input type="submit" value="sign up!">
     </form>
+        <%= errorMsg %>
     <table>
         <tr>
             <th>First name</th>

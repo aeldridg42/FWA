@@ -30,9 +30,9 @@ public class SignIn extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if (userService.signIn(email, password)) {
+            userService.addLogInfo(email, request.getRemoteAddr());
             request.getSession().setAttribute("user", userService.getUser(email));
             request.getSession().setAttribute("auth", 1);
-            userService.addLogInfo(email, request.getRemoteAddr());
             response.sendRedirect("/profile");
         } else {
             request.getRequestDispatcher("WEB-INF/jsp/signIn.jsp").forward(request, response);

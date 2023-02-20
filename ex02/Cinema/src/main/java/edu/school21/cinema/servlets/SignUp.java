@@ -44,8 +44,16 @@ public class SignUp extends HttpServlet {
         String phone_number = request.getParameter("phone_number");
         String password = request.getParameter("password");
 
-        userService.signUp(email, first_name, last_name, phone_number, password);
-
-        doGet(request, response);
+        String ERROR = userService.signUp(email, first_name, last_name, phone_number, password);
+        System.out.println(ERROR);
+        if (ERROR.length() == 0)
+            response.sendRedirect("/signIn");
+        else {
+            request.getSession().setAttribute("ERROR", ERROR);
+//            response.sendRedirect("/signUp");
+            doGet(request, response);
+        }
     }
+
+
 }

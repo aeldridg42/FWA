@@ -3,6 +3,7 @@ package edu.school21.cinema.services;
 import edu.school21.cinema.models.User;
 import edu.school21.cinema.models.UserLog;
 import edu.school21.cinema.repositories.UserRepository;
+import edu.school21.cinema.utils.ErrorFinder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ErrorFinder errorFinder;
 
     @Override
     public List<User> findAll() {
@@ -25,11 +27,14 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean signUp(String email, String firstName, String lastName, String phoneNumber, String password) {
+    public String signUp(String email, String firstName, String lastName, String phoneNumber, String password) {
         if (userRepository.findByEmail(email).isPresent())
-            return false;
+            return email + ": this email is already taken";
+        String ERROR = errorFinder.getERROR(email, firstName, lastName, phoneNumber, password);
+        if (ERROR.length() != 0)
+            return ERROR;
         userRepository.save(new User(email, firstName, lastName, phoneNumber, passwordEncoder.encode(password)));
-        return true;
+        return ERROR;
     }
 
     @Override
