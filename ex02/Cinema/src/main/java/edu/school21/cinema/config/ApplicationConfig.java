@@ -37,7 +37,7 @@ public class ApplicationConfig {
         dataSource.setUsername(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
         Connection connection = dataSource.getConnection();
-        ScriptUtils.executeSqlScript(connection, new ClassPathResource("sql/schema.sql"));
+        ScriptUtils.executeSqlScript(connection, new ClassPathResource(Objects.requireNonNull(env.getProperty("schema"))));
 
         return dataSource;
     }
@@ -46,7 +46,6 @@ public class ApplicationConfig {
     public JdbcTemplate jdbcTemplate() throws SQLException {
         return new JdbcTemplate(dataSource());
     }
-
 
 
     @Bean

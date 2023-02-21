@@ -14,6 +14,16 @@
 </head>
 <body>
 <c>${user.firstName} ${user.lastName},${user.email}</c>
+<form method="post" enctype="multipart/form-data">
+    <div>
+        <label for="file">Choose file to upload</label>
+        <input type="file" id="file" name="file" accept="image/*" multiple>
+    </div>
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
+
 <table>
     <tr>
         <th>Date</th>
@@ -25,6 +35,22 @@
             <td>${log.date}</td>
             <td>${log.time}</td>
             <td>${log.ip}</td>
+        </tr>
+    </c:forEach>
+</table>
+
+<table>
+    <tr>
+        <th>File name</th>
+        <th>Size</th>
+        <th>MIME</th>
+    </tr>
+    <jsp:useBean id="files" scope="request" type="java.util.List"/>
+    <c:forEach items="${files}" var="file">
+        <tr>
+            <td>${file.get(0)}</td>
+            <td>${file.get(1)}</td>
+            <td>${file.get(2)}</td>
         </tr>
     </c:forEach>
 </table>
