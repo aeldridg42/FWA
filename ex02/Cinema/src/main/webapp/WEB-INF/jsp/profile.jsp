@@ -14,6 +14,7 @@
 </head>
 <body>
 <c>${user.firstName} ${user.lastName},${user.email}</c>
+<img src="/FWA/images/default.webp" alt="Trulli" width="500" height="333">
 <form method="post" enctype="multipart/form-data">
     <div>
         <label for="file">Choose file to upload</label>

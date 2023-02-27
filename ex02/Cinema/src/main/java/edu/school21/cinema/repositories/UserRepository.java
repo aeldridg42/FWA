@@ -14,4 +14,6 @@ public interface UserRepository {
 
     void saveLog(UserLog log);
     List<UserLog> getLog(User user);
+
+    void savePicName(String email, String picName);
 }

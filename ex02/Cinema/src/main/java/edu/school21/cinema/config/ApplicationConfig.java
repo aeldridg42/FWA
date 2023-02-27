@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -22,6 +23,10 @@ import java.util.Objects;
 public class ApplicationConfig {
     private final ApplicationContext applicationContext;
     private final Environment env;
+
+//    @Value("${defaultImage}")
+//    private String defaultImage;
+
     @Autowired
     public ApplicationConfig(ApplicationContext applicationContext, Environment env) {
         this.applicationContext = applicationContext;
@@ -51,6 +56,11 @@ public class ApplicationConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public String defaultImage() throws IOException {
+        return new ClassPathResource(Objects.requireNonNull(env.getProperty("defaultImage"))).getFile().getAbsolutePath();
     }
 
 }

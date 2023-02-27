@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService {
                 new Time(System.currentTimeMillis()),
                 ip));
     }
+
+    @Override
+    public void addPictureName(String email, String picName) {
+        userRepository.savePicName(email, picName);
+    }
 }

@@ -1,11 +1,13 @@
 package edu.school21.cinema.utils;
 
 import jakarta.servlet.http.Part;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,31 +15,31 @@ import java.util.Objects;
 
 @Component
 public class FilesUpload {
-    private static final String PATH;
-    private static final File DIR;
+    private final String PATH;
+    private final File DIR;
 
-    static {
+    @Autowired
+    public FilesUpload(String defaultImage) throws IOException {
         PATH = System.getProperty("catalina.home")
                 + File.separator + "uploads";
         DIR = new File(PATH);
         if (!DIR.exists()) DIR.mkdir();
+        File defIm = new File(defaultImage);
+        Files.copy(defIm.toPath(),
+                new File(DIR.getAbsoluteFile() + File.separator + defIm.getName()) .toPath(),
+                REPLACE_EXISTING);
     }
 
-    public void upload(Part part) throws IOException {
-        System.out.println("start");
+    public String upload(Part part) throws IOException {
         if (part == null)
-            return;
-        System.out.println(1);
+            return "";
         String fileName = PATH + File.separator + part.getSubmittedFileName();
         File file = new File(fileName);
-        System.out.println(2);
         if (file.exists()) {
-            System.out.println(3);
             fileName = addSuffix(file);
         }
-        System.out.println(fileName);
         part.write(fileName);
-        System.out.println("end");
+        return fileName;
     }
 
     public List<List<String>> getFiles() throws IOException {

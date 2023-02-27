@@ -15,4 +15,6 @@ public interface UserService {
 
     void addLogInfo(String email, String ip);
 
+    void addPictureName(String email, String picName);
+
 }

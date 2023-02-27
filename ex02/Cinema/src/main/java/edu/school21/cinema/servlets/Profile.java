@@ -1,5 +1,7 @@
 package edu.school21.cinema.servlets;
 
+import edu.school21.cinema.models.User;
+import edu.school21.cinema.services.UserService;
 import edu.school21.cinema.utils.FilesUpload;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletConfig;
@@ -18,12 +20,14 @@ import java.io.IOException;
 @MultipartConfig
 public class Profile extends HttpServlet {
     private FilesUpload filesUpload;
+    private UserService userService;
 
     @Override
     public void init(ServletConfig config) {
         ServletContext context = config.getServletContext();
         ApplicationContext springContext = (ApplicationContext) context.getAttribute("springContext");
         this.filesUpload = springContext.getBean(FilesUpload.class);
+        this.userService = springContext.getBean(UserService.class);
     }
 
     @Override
@@ -40,7 +44,10 @@ public class Profile extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        filesUpload.upload(req.getPart("file"));
+        String picName = filesUpload.upload(req.getPart("file"));
+        String email = ((User)(req.getSession().getAttribute("user"))).getEmail();
+        userService.addPictureName(email, picName);
+        req.getSession().setAttribute("avatar", picName);
         doGet(req, resp);
     }
 }

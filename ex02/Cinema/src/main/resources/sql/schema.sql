@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
     firstName VARCHAR(20) NOT NULL,
     lastName VARCHAR(20) NOT NULL,
     phoneNumber VARCHAR(12) NOT NULL,
-    password VARCHAR(80) NOT NULL
+    password VARCHAR(80) NOT NULL,
+    picName VARCHAR(100)
 );
 
 CREATE TABLE IF NOT EXISTS usersLog (
