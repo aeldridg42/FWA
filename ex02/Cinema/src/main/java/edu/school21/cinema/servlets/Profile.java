@@ -48,6 +48,7 @@ public class Profile extends HttpServlet {
         String email = ((User)(req.getSession().getAttribute("user"))).getEmail();
         userService.addPictureName(email, picName);
         req.getSession().setAttribute("avatar", picName);
+        System.out.println(picName.substring(picName.lastIndexOf("/")));
         doGet(req, resp);
     }
 }

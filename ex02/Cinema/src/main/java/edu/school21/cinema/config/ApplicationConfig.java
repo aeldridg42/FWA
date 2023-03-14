@@ -24,9 +24,6 @@ public class ApplicationConfig {
     private final ApplicationContext applicationContext;
     private final Environment env;
 
-//    @Value("${defaultImage}")
-//    private String defaultImage;
-
     @Autowired
     public ApplicationConfig(ApplicationContext applicationContext, Environment env) {
         this.applicationContext = applicationContext;

@@ -33,6 +33,7 @@ public class SignIn extends HttpServlet {
             userService.addLogInfo(email, request.getRemoteAddr());
             request.getSession().setAttribute("user", userService.getUser(email));
             request.getSession().setAttribute("auth", 1);
+            request.getSession().setAttribute("avatar", "/default.webp");
             response.sendRedirect("/profile");
         } else {
             request.getRequestDispatcher("WEB-INF/jsp/signIn.jsp").forward(request, response);

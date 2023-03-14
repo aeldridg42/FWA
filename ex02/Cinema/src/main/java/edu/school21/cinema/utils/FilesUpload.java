@@ -1,6 +1,7 @@
 package edu.school21.cinema.utils;
 
 import jakarta.servlet.http.Part;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
+@Getter
 public class FilesUpload {
     private final String PATH;
     private final File DIR;
