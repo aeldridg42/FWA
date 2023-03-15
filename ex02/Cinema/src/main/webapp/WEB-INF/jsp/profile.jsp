@@ -49,7 +49,7 @@
     <jsp:useBean id="files" scope="request" type="java.util.List"/>
     <c:forEach items="${files}" var="file">
         <tr>
-            <td>${file.get(0)}</td>
+            <td><p><a href="/FWA/images/${file.get(0)}">${file.get(0)}</a></p></td>
             <td>${file.get(1)}</td>
             <td>${file.get(2)}</td>
         </tr>
