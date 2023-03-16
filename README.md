@@ -11,5 +11,5 @@ There are 3 ways to run this app:
 2) Run `mvn clean package` then deploy Cinema.war to Tomcat by yourself xD
 3) Create user "tomcat", password "tomcat" then run `mvn clean package tomcat7:deploy`
 
-## How to run
+## How to run:
 Open https://localhost:8080 in any browser!
