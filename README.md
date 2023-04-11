@@ -1,7 +1,7 @@
 # First Web Application
 
 ## About:
-This simple web application is using `Java Servlet API`, `Spring`, `jsp` and `PostgreSQL`.
+This simple web application uses `Java Servlet API`, `Spring`, `jsp` and `PostgreSQL`.
 
 ## How to compile:
 Before start you should add your database credentials to [application.properties](ex02/Cinema/src/main/resources/application.properties) file.
